@@ -1,0 +1,32 @@
+<label for="" class="form-label">
+  {{ label }}
+</label>
+<input
+  [formControl]="control"
+  class="form-control"
+  [ngClass]="{
+    'is-invalid': showErrors()
+  }"
+  [mask]="mask"
+/>
+
+<ng-container *ngIf="showErrors()">
+  <div *ngIf="control.errors?.required" class="invalid-feedback">
+    This filed is required
+  </div>
+  <div *ngIf="control.errors?.minlength" class="invalid-feedback">
+    you entered
+    {{ control.errors?.minlength.actualLength }} characters, but you should at
+    least enter
+    {{ control.errors?.minlength.requiredLength }}
+  </div>
+  <div *ngIf="control.errors?.maxlength" class="invalid-feedback">
+    you entered
+    {{ control.errors?.maxlength.actualLength }} characters, but you should at
+    most enter
+    {{ control.errors?.maxlength.requiredLength }}
+  </div>
+  <div *ngIf="control.errors?.pattern" class="invalid-feedback">
+    Invalid format
+  </div>
+</ng-container>
